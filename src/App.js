@@ -1,8 +1,5 @@
-// import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Product from "./components/Product";
 import "./App.css";
-// import { Button, Card } from "react-bootstrap";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -58,8 +55,6 @@ function App() {
 
   return (
     <div className="App text-center ">
-      {/* <Product />
-      <div className="row">{cards}</div> */}
       <RouterProvider router={router} />
     </div>
   );
