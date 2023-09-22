@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/cartSlice";
+import { getProducts } from "../store/productSlice";
 
 const Product = () => {
   const dispatch = useDispatch();
-  const [products, getProducts] = useState([]); //state storing the data
+  const { data: products, status } = useSelector((state) => state.product);
   // calling api
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((data) => data.json())
-      .then((result) => getProducts(result));
-  });
+    dispatch(getProducts());
+  }, []);
+  if (status === "Loading") {
+    return <p>Loading .....</p>;
+  }
+  if (status === "error") {
+    return <p>OOpss!! something went wrong while fetching the data!!</p>;
+  }
 
   // passing data to cart
   const addToCart = (product) => {
